@@ -4,6 +4,7 @@ import RadarChartDemo from './charts/RadarChartDemo';
 import LineChartDemo from './charts/LineChartDemo';
 import PieChartDemo from './charts/PieChartDemo';
 import BarChartDemo from './charts/BarChartDemo';
+import DatePickerDemo from './material/DatePickerDemo';
 import SideBar from './SideBar';
 import MainContents from './MainContents';
 
@@ -22,6 +23,7 @@ export default () => {
               <Route path="/line" component={LineChartDemo}></Route>
               <Route path="/pie" component={PieChartDemo}></Route>
               <Route path="/bar" component={BarChartDemo}></Route>
+              <Route path="/datepicker" component={DatePickerDemo}></Route>
             </MainContents>
           </main>
         </Router>

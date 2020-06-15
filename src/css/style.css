@@ -43,20 +43,23 @@ header {
   background: #2a93d4;
 }
 
+/* サイドバー関連 */
 aside {
   grid-column: 1;
   grid-row: 2 / 3;
-  background: #3dd9d6;
+  background: #ceefe4;
 }
-
 aside .userbotton {
   display: block;
+}
+aside a {
+  text-decoration: none; /*下線表示抑止*/
 }
 
 main {
   grid-column: 2;
   grid-row: 2/3;
-  background: #add9d8;
+  background: #ceefe4;
 }
 
 footer {
@@ -64,3 +67,4 @@ footer {
   grid-row: 3/4;
   background: #125488;
 }
+

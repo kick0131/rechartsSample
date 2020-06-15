@@ -17,6 +17,7 @@ export default () => {
             <Link to="line"><Button variant="outlined" color="primary" >ラインチャート　</Button></Link>
             <Link to="pie"><Button variant="outlined" color="primary" >パイチャート　　</Button></Link>
             <Link to="bar"><Button variant="outlined" color="primary" >バーチャート　　</Button></Link>
+            <Link to="datepicker"><Button variant="outlined" color="primary" >カレンダー　　　</Button></Link>
         </div >
     );
     return render;
