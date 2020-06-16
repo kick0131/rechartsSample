@@ -45,15 +45,19 @@ const datasplit = () => {
 
 // ラインチャート用データセット
 class GraphData {
-  constructor(a, b, c, d) {
+  constructor(a, b, c, d, e, f) {
     // グラフ表示データ
     this.chartdata = a;
-    // グラフ1用キー名
-    this.data1key = b;
-    // グラフ2用キー名
-    this.data2key = c;
+    // グラフ1_グラフ名
+    this.data1name = b;
+    // グラフ1_データキー名
+    this.data1key = c;
+    // グラフ1_グラフ名
+    this.data2name = d;
+    // グラフ1_データキー名
+    this.data2key = e;
     // グラフタイトル
-    this.chartTitle = d;
+    this.chartTitle = f;
   }
 }
 
@@ -81,8 +85,8 @@ export default () => {
   var data2key = formatDate(afterDate);;
 
   // ★グラフ別投入データ
-  const gA = new GraphData(chartdata, data1key, data2key, '表タイトルA');
-  const gB = new GraphData(chartdata, data1key, data2key, '表タイトルB');
+  const gA = new GraphData(chartdata, data1key + '週', data1key, data2key + '週', data2key, '表タイトルA');
+  const gB = new GraphData(chartdata, data1key + '週', data1key, data2key + '週', data2key, '表タイトルB');
 
   return (
     <>

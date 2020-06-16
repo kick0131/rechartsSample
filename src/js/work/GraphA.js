@@ -17,8 +17,8 @@ export default () => {
           <XAxis dataKey="time" />
           <YAxis />
           <Legend wrapperStyle={{ color: '#333' }} />
-          <Line name={chartData.data1key} dataKey={chartData.data1key} stroke="#8884d8" />
-          <Line name={chartData.data2key} dataKey={chartData.data2key} stroke="#82ca9d" />
+          <Line name={chartData.data1name} dataKey={chartData.data1key} stroke="#8884d8" />
+          <Line name={chartData.data2name} dataKey={chartData.data2key} stroke="#82ca9d" />
         </LineChart>
       </ResponsiveContainer>
     </div>
