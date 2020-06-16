@@ -3,24 +3,26 @@ import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  DatePicker,
-  KeyboardDatePicker,
+  DatePicker
 } from '@material-ui/pickers';
+
+// ユーザ定義コンポーネント
+import { DatePickerContext } from './WorkGraph01'
 
 //表示させたいデータ群
 import * as json from '../../data/chartdata.json';
 const chartdata = json.score01;
 
 export default () => {
-  // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2020-06-01T12:34:56'));
-  const [beforeDate, setBeforeDate] = React.useState();
+  // 親コンポーネント情報
+  const datepicker = React.useContext(DatePickerContext);
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
+  // 親コンポーネントのstateを更新
   const handleBeforeDateChange = (date) => {
-    setBeforeDate(date);
+    datepicker.beforehandler(date);
+  };
+  const handleAfterDateChange = (date) => {
+    datepicker.afterhandler(date);
   };
 
   // 週末判定
@@ -34,23 +36,18 @@ export default () => {
         <DatePicker 
           id="date-picker"
           label="Before"
-          value={selectedDate}
+          value={datepicker.before}
           onChange={handleBeforeDateChange}
           shouldDisableDate={disableWeekends}
           format="yyyy/MM/dd"
         />
-        <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="yyyy/MM/dd"
-          margin="normal"
-          id="date-picker-inline"
+        <DatePicker 
+          id="date-picker"
           label="After"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
+          value={datepicker.after}
+          onChange={handleAfterDateChange}
+          shouldDisableDate={disableWeekends}
+          format="yyyy/MM/dd"
         />
       </Grid>
     </MuiPickersUtilsProvider>

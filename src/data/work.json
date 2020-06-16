@@ -1,0 +1,16 @@
+{
+  "speed_mean": [
+    {"key": "6/1 06:00", "value":1.632813},
+    {"key": "6/1 12:00", "value":2.25},
+    {"key": "6/1 18:00", "value":1.4142},
+    {"key": "6/3 06:00", "value":2.632813},
+    {"key": "6/3 12:00", "value":4.25},
+    {"key": "6/3 18:00", "value":2.4142}
+  ],
+  "stride_mean": [],
+  "dorsiflexion_mean": [],
+  "planterflextion_mean": [],
+  "lift_mean": [],
+  "circumduction_mean": [],
+  "footrotation_mean": []
+}
