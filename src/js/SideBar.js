@@ -3,13 +3,6 @@ import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
 
 export default () => {
-    console.log('SideBar');
-
-    // ボタン押下イベント
-    const handleClickButton = () => {
-        alert('ボタンが押下されました');
-    };
-
     const render = (
         <div className="userbotton">
             <Link to=""><Button variant="outlined" color="primary" style={{ color: "#333" }}>初期表示　　　　</Button></Link>
