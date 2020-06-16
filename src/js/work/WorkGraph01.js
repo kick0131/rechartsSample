@@ -16,8 +16,8 @@ export const ChartDataContext = React.createContext('');
 // ・ｘ軸は曜日ｙ軸は値
 // 
 const datasplit = () => {
-// ※加工ロジックは省略し、グラフ表示可能なデータを記載
-var result = [
+  // ※加工ロジックは省略し、グラフ表示可能なデータを記載
+  var result = [
     { "time": "月", "6/1": 1.632813, "6/2": 2.632813, "6/3": 2 },
     { "time": "", "6/1": 2.25, "6/2": 4.25, "6/3": 1 },
     { "time": "", "6/1": 1.4142, "6/2": 2.4142, "6/3": 5 },
@@ -86,10 +86,12 @@ export default () => {
 
   return (
     <>
-      <DatePickerContext.Provider value={resource}>
-        <WorkDatePicker />
-      </DatePickerContext.Provider>
-      <div>
+      <div className='topItem'>
+        <DatePickerContext.Provider value={resource}>
+          <WorkDatePicker />
+        </DatePickerContext.Provider>
+      </div>
+      <div className='bottomItem'>
         <ChartDataContext.Provider value={gA}>
           <GraphA />
           <GraphA />

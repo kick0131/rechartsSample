@@ -2,7 +2,7 @@ import React from 'react';
 
 export default (props) => {
   const renderParam = (
-    <div>
+    <div className='mainContents'>
       {props.children}
     </div>
   );
