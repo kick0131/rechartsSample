@@ -4,7 +4,7 @@ import GraphB from './GraphB';
 
 // 表示させたいデータ群(DynamoDBを想定)
 import * as json from '../../data/work.json';
-const chartdata = json.stride_mean;
+const chartData = json.dorsiflexion_mean;
 
 export const DatePickerContext = React.createContext('');
 export const ChartDataContext = React.createContext('');
@@ -19,18 +19,16 @@ function datasplit () {
 // ラインチャート用データセット
 class GraphData {
   constructor(a, b, c, d, e, f) {
-    // グラフ表示データ
-    this.chartdata = a;
-    // グラフ1_グラフ名
-    this.data1name = b;
-    // グラフ1_データキー名
-    this.data1key = c;
-    // グラフ1_グラフ名
-    this.data2name = d;
-    // グラフ1_データキー名
-    this.data2key = e;
     // グラフタイトル
-    this.chartTitle = f;
+    this.chartTitle = a;
+    // グラフ表示データ
+    this.chartData = b;
+    // グラフ1_グラフ名,データキー名
+    this.beforeName = c;
+    this.beforeKey = d;
+    // グラフ2_グラフ名,データキー名
+    this.afterName = e;
+    this.afterKey = f;
   }
 }
 
@@ -54,13 +52,12 @@ export default () => {
 
   // 整形してグラフデータに投入
 //  chartdata = datasplit();
-  var data1key = formatDate(beforeDate);
-  var data2key = formatDate(afterDate);
+  var beforeKey = formatDate(beforeDate);
+  var afterKey = formatDate(afterDate);
   
-
-  // ★グラフ別投入データ
-  const gA = new GraphData(chartdata, data1key, data1key, data2key, data2key, '高精度データA');
-  const gB = new GraphData(chartdata, data1key, data1key, data2key, data2key, '高精度データB');
+  // 投入データ
+  // 現時点の想定では、日付をデータキーをするのでそのまま凡例名として使用する
+  const gA = new GraphData('高精度データA',chartData, beforeKey, beforeKey, afterKey, afterKey );
 
   return (
     <>

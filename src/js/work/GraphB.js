@@ -1,5 +1,7 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer, Tooltip } from 'recharts';
+import Typography from '@material-ui/core/Typography'
+import moment from 'moment'
 
 // ユーザ定義コンポーネント
 import { ChartDataContext } from './WorkGraph02'
@@ -8,17 +10,30 @@ export default () => {
   // 親コンポーネント情報
   const chartData = React.useContext(ChartDataContext);
 
+  // 現在日の00:00:00と24:00:00のUNIXシリアル値をグラフのMIN,MAXとして取得
+  // リストに投入するタイムスタンプも現在日に補正する事
+  var domainMin = moment("00:00:00", 'HH:mm:ss').unix();
+  var ticks = [
+    moment("00:00:00", 'HH:mm:ss').unix(),
+    moment("06:00:00", 'HH:mm:ss').unix(),
+    moment("12:00:00", 'HH:mm:ss').unix(),
+    moment("18:00:00", 'HH:mm:ss').unix(),
+    moment("24:00:00", 'HH:mm:ss').unix(),
+  ];
+  var domainMax = moment("23:59:59", 'HH:mm:ss').unix();
+
   return (
     <div style={{ width: '800px', height: '300px' }}>
-      <h4 style={{ color: "#333", margin:'0'}}>{chartData.chartTitle}</h4>
+      <Typography variant="h6">{chartData.chartTitle}</Typography>
       <ResponsiveContainer height='80%'>
-        <LineChart data={chartData.chartdata} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+        <LineChart data={chartData.chartData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="time" interval={3} />
-          <YAxis/>
+          <XAxis dataKey="time" type='number' domain={[domainMin, domainMax]} tickFormatter={(unixTime) => moment(unixTime, 'X').format('HH')} ticks={ticks}/>
+          <YAxis />
           <Legend wrapperStyle={{ color: '#333' }} />
-          <Line name={chartData.data1name} dataKey={chartData.data1key} stroke="#8884d8" />
-          <Line name={chartData.data2name} dataKey={chartData.data2key} stroke="#82ca9d" />
+          <Line connectNulls name={chartData.beforeName} dataKey={chartData.beforeKey} stroke="#8884d8" />
+          <Line connectNulls name={chartData.afterName} dataKey={chartData.afterKey} stroke="#82ca9d" />
+          <Tooltip cursor={{ stroke: 'blue', strokeWidth: 2 }} contentStyle={{ height: '10%' }} />
         </LineChart>
       </ResponsiveContainer>
     </div>

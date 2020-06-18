@@ -50,7 +50,7 @@ class GraphData {
     // グラフタイトル
     this.chartTitle = a;
     // グラフ表示データ
-    this.chartdata = b;
+    this.chartData = b;
     // 比較前右足_グラフ名,データキー名
     this.BRname = c;
     this.BRkey = d;
