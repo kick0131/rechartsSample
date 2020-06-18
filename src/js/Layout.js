@@ -9,13 +9,14 @@ import WorkGraph01 from './work/WorkGraph01';
 import WorkGraph02 from './work/WorkGraph02';
 import SideBar from './SideBar';
 import MainContents from './MainContents';
+import Typography from '@material-ui/core/Typography'
 
 export default () => {
 
   return (
     <div>
       <div className='my-grid'>
-        <header className='my-grid-item'>図形描画</header>
+        <header className='my-grid-item'><Typography>ダッシュボード</Typography></header>
         <Router>
           <aside className='my-grid-item'><SideBar /></aside>
           <main className='my-grid-item'>
@@ -33,7 +34,7 @@ export default () => {
             </MainContents>
           </main>
         </Router>
-        <footer className='my-grid-item'>footer</footer>
+        <footer className='my-grid-item'><Typography>コピーライト</Typography></footer>
       </div>
     </div>
   );

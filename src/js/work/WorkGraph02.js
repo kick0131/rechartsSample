@@ -73,9 +73,6 @@ export default () => {
         <ChartDataContext.Provider value={gA}>
           <GraphB />
         </ChartDataContext.Provider>
-        <ChartDataContext.Provider value={gB}>
-          <GraphB />
-        </ChartDataContext.Provider>
       </div>
     </>
   );

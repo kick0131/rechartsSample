@@ -9,7 +9,7 @@ export default () => {
   const chartData = React.useContext(ChartDataContext);
 
   return (
-    <div style={{ width: '500px', height: '300px' }}>
+    <div style={{ width: '600px', height: '300px' }}>
       <h4 style={{ color: "#333", margin:'0'}}>{chartData.chartTitle}</h4>
       <ResponsiveContainer height='80%'>
         <LineChart data={chartData.chartdata} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
@@ -17,8 +17,10 @@ export default () => {
           <XAxis dataKey="time" />
           <YAxis />
           <Legend wrapperStyle={{ color: '#333' }} />
-          <Line name={chartData.data1name} dataKey={chartData.data1key} stroke="#8884d8" />
-          <Line name={chartData.data2name} dataKey={chartData.data2key} stroke="#82ca9d" />
+          <Line name={chartData.BRname} dataKey={chartData.BRkey} stroke="#4e505f" />
+          <Line name={chartData.BLname} dataKey={chartData.BLkey} stroke="#66809c" />
+          <Line name={chartData.ARname} dataKey={chartData.ARkey} stroke="#588133" />
+          <Line name={chartData.ALname} dataKey={chartData.ALkey} stroke="#adbd37" />
         </LineChart>
       </ResponsiveContainer>
     </div>
