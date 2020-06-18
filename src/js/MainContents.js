@@ -2,9 +2,9 @@ import React from 'react';
 
 export default (props) => {
   const renderParam = (
-    <div className='mainContents'>
+    <main className='mainContents'>
       {props.children}
-    </div>
+    </main>
   );
 
   return renderParam;
