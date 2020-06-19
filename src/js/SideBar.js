@@ -1,12 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, } from 'react';
 import Button from '@material-ui/core/Button';
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { LoginInfoContext } from './Layout'
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded';
 
 export default () => {
 
     // 親コンポーネントから更新用のハンドラと更新元情報を取得
     const loginInfo = useContext(LoginInfoContext);
+
+    const linkData = [
+        ["", "Top"],
+        // ["radar", "レーダーチャート　　　"],
+        // ["line", "ラインチャート　"],
+        // ["pie", "パイチャート　　"],
+        // ["bar", "バーチャート　　"],
+        // ["datepicker", "カレンダー　　　"],
+        ["insole1", "サンプル１"],
+        ["insole2", "サンプル２"],
+        ["insole3", "サンプル３"],
+    ];
+
+    // Linkコンポーネントのto相当の動作
+    const history = useHistory();
+    const handleLink = path => history.push(path);
 
     const SideBarRander = () => {
         console.log('=== SideBarRander');
@@ -20,20 +41,21 @@ export default () => {
             );
 
         } else {
-
             return (
-                <aside>
-                    <Link to=""><Button color="primary">Top</Button></Link>
-                    {/* <Link to="radar"><Button color="primary">レーダーチャート</Button></Link>
-                    <Link to="line"><Button color="primary" >ラインチャート　</Button></Link>
-                    <Link to="pie"><Button color="primary" >パイチャート　　</Button></Link>
-                    <Link to="bar"><Button color="primary" >バーチャート　　</Button></Link>
-                    <Link to="datepicker"><Button color="primary" >カレンダー　　　</Button></Link> */}
-                    <Link to="insole1"><Button color="primary" >サンプル１　　　</Button></Link>
-                    <Link to="insole2"><Button color="primary" >サンプル２　　　</Button></Link>
-                    <Link to="insole3"><Button color="primary" >サンプル３　　　</Button></Link>
-                    <Link to="insole4"><Button color="primary" >サンプル４　　　</Button></Link>
-                </aside >
+                <>
+                    <aside>
+                        <List component="nav">
+                            {linkData.map((item, keyIndex) =>
+                                <ListItem button onClick={() => handleLink(item[0])}>
+                                    <ListItemIcon>
+                                        <AccountBoxRoundedIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={item[1]} />
+                                </ListItem>
+                            )}
+                        </List>
+                    </aside >
+                </>
             );
         }
     }

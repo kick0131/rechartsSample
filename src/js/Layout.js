@@ -7,6 +7,7 @@ import BarChartDemo from './charts/BarChartDemo';
 import DatePickerDemo from './material/DatePickerDemo';
 import WorkGraph01 from './work/WorkGraph01';
 import WorkGraph02 from './work/WorkGraph02';
+import WorkGraph03 from './work/WorkGraph03';
 import Header from './Header';
 import SideBar from './SideBar';
 import MainContents from './MainContents';
@@ -75,7 +76,7 @@ export default () => {
           <Router>
             <SideBar className='my-grid-item' />
             <MainContents>
-              <Route extract path="/" component={WorkGraph02}></Route>
+              <Route extract path="/" ></Route>
               <Route path="/radar" component={RadarChartDemo}></Route>
               <Route path="/line" component={LineChartDemo}></Route>
               <Route path="/pie" component={PieChartDemo}></Route>
@@ -83,7 +84,7 @@ export default () => {
               <Route path="/datepicker" component={DatePickerDemo}></Route>
               <Route path="/insole1" component={WorkGraph01}></Route>
               <Route path="/insole2" component={WorkGraph02}></Route>
-              <Route path="/insole3" component={WorkGraph01}></Route>
+              <Route path="/insole3" component={WorkGraph03}></Route>
               <Route path="/insole4" component={WorkGraph01}></Route>
             </MainContents>
           </Router>

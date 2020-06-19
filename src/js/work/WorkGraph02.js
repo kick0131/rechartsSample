@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import WorkDatePickerB from './WorkDatePickerForB';
-import GraphB from './GraphB';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
+import WorkDatePickerFor02 from './WorkDatePickerFor02';
+import Graph02 from './Graph02';
 
 // 表示させたいデータ群(DynamoDBを想定)
 import * as json from '../../data/work.json';
@@ -92,13 +92,12 @@ export default () => {
         <Grid item xs={12} >
           <Grid container justify="center" spacing={2}>
             <Grid item >
-              <FormControl variant="outlined" color="secondaly" className={classes.formControl}>
+              <FormControl variant="outlined" className={classes.formControl}>
                 <Select
                   labelId="selectuser-label"
                   id="selectuser"
                   value={selectUser}
                   onChange={(e) => { setSelectUser(e.target.value) }}
-                  color="secondaly"
                 >
                   {selectData.map((item, keyIndex) =>
                     <MenuItem key={keyIndex} value={item} >{item}</MenuItem>
@@ -108,20 +107,20 @@ export default () => {
             </Grid>
             <Grid item >
               <DatePickerContext.Provider value={resource}>
-                <WorkDatePickerB />
+                <WorkDatePickerFor02 />
               </DatePickerContext.Provider>
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12} >
           <ChartDataContext.Provider value={gA}>
-            <GraphB />
-            <GraphB />
-            <GraphB />
-            <GraphB />
-            <GraphB />
-            <GraphB />
-            <GraphB />
+            <Graph02 />
+            <Graph02 />
+            <Graph02 />
+            <Graph02 />
+            <Graph02 />
+            <Graph02 />
+            <Graph02 />
           </ChartDataContext.Provider>
         </Grid>
       </Grid>

@@ -1,4 +1,11 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
+
 import WorkDatePicker from './WorkDatePicker';
 import GraphA from './GraphA';
 
@@ -8,6 +15,13 @@ var chartdata = json.speed_mean;
 
 export const DatePickerContext = React.createContext('');
 export const ChartDataContext = React.createContext('');
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    minWidth: 120,
+  },
+}));
+
 
 // DynamoDBのデータを加工
 // 
@@ -19,27 +33,27 @@ const datasplit = () => {
 
   // ※加工ロジックは省略し、グラフ表示可能なデータを記載
   var result = [
-    { "time": "月", "BR": 1.632813,"BL": 2.632813,"AR": 3.632813, "AL": 2 },
-    { "time": "",   "BR": 2.25,    "BL": 4.25,    "AR": 2.25,     "AL": 1 },
-    { "time": "",   "BR": 1.4142,  "BL": 2.4142,  "AR": 1.4142,   "AL": 5 },
-    { "time": "火", "BR": 1.632813,"BL": 2.632813,"AR": 3.632813, "AL": 3 },
-    { "time": "",   "BR": 2.25,    "BL": 4.25,    "AR": 2.25,     "AL": 2 },
-    { "time": "",   "BR": 1.4142,  "BL": 2.4142,  "AR": 1.4142,   "AL": 1 },
-    { "time": "水", "BR": 1.632813,"BL": 2.632813,"AR": 3.632813, "AL": 2 },
-    { "time": "",   "BR": 2.25,    "BL": 4.25,    "AR": 2.25,     "AL": 7 },
-    { "time": "",   "BR": 1.4142,  "BL": 2.4142,  "AR": 1.4142,   "AL": 2 },
-    { "time": "木", "BR": 1.632813,"BL": 2.632813,"AR": 3.632813, "AL": 4 },
-    { "time": "",   "BR": 2.25,    "BL": 4.25,    "AR": 2.25,     "AL": 6 },
-    { "time": "",   "BR": 1.4142,  "BL": 2.4142,  "AR": 1.4142,   "AL": 5 },
-    { "time": "金", "BR": 1.632813,"BL": 2.632813,"AR": 3.632813, "AL": 5 },
-    { "time": "",   "BR": 2.25,    "BL": 4.25,    "AR": 2.25,     "AL": 1 },
-    { "time": "",   "BR": 1.4142,  "BL": 2.4142,  "AR": 1.4142,   "AL": 4 },
-    { "time": "土", "BR": 1.632813,"BL": 2.632813,"AR": 3.632813, "AL": 6 },
-    { "time": "",   "BR": 2.25,    "BL": 4.25,    "AR": 2.25,     "AL": 1 },
-    { "time": "",   "BR": 1.4142,  "BL": 2.4142,  "AR": 1.4142,   "AL": 3 },
-    { "time": "日", "BR": 1.632813,"BL": 2.632813,"AR": 3.632813, "AL": 2 },
-    { "time": "",   "BR": 2.25,    "BL": 4.25,    "AR": 2.25,     "AL": 1 },
-    { "time": "",   "BR": 1.4142,  "BL": 2.4142,  "AR": 1.4142,   "AL": 3 }
+    { "time": "月", "BR": 1.632813, "BL": 2.632813, "AR": 3.632813, "AL": 2 },
+    { "time": "", "BR": 2.25, "BL": 4.25, "AR": 2.25, "AL": 1 },
+    { "time": "", "BR": 1.4142, "BL": 2.4142, "AR": 1.4142, "AL": 5 },
+    { "time": "火", "BR": 1.632813, "BL": 2.632813, "AR": 3.632813, "AL": 3 },
+    { "time": "", "BR": 2.25, "BL": 4.25, "AR": 2.25, "AL": 2 },
+    { "time": "", "BR": 1.4142, "BL": 2.4142, "AR": 1.4142, "AL": 1 },
+    { "time": "水", "BR": 1.632813, "BL": 2.632813, "AR": 3.632813, "AL": 2 },
+    { "time": "", "BR": 2.25, "BL": 4.25, "AR": 2.25, "AL": 7 },
+    { "time": "", "BR": 1.4142, "BL": 2.4142, "AR": 1.4142, "AL": 2 },
+    { "time": "木", "BR": 1.632813, "BL": 2.632813, "AR": 3.632813, "AL": 4 },
+    { "time": "", "BR": 2.25, "BL": 4.25, "AR": 2.25, "AL": 6 },
+    { "time": "", "BR": 1.4142, "BL": 2.4142, "AR": 1.4142, "AL": 5 },
+    { "time": "金", "BR": 1.632813, "BL": 2.632813, "AR": 3.632813, "AL": 5 },
+    { "time": "", "BR": 2.25, "BL": 4.25, "AR": 2.25, "AL": 1 },
+    { "time": "", "BR": 1.4142, "BL": 2.4142, "AR": 1.4142, "AL": 4 },
+    { "time": "土", "BR": 1.632813, "BL": 2.632813, "AR": 3.632813, "AL": 6 },
+    { "time": "", "BR": 2.25, "BL": 4.25, "AR": 2.25, "AL": 1 },
+    { "time": "", "BR": 1.4142, "BL": 2.4142, "AR": 1.4142, "AL": 3 },
+    { "time": "日", "BR": 1.632813, "BL": 2.632813, "AR": 3.632813, "AL": 2 },
+    { "time": "", "BR": 2.25, "BL": 4.25, "AR": 2.25, "AL": 1 },
+    { "time": "", "BR": 1.4142, "BL": 2.4142, "AR": 1.4142, "AL": 3 }
   ];
   return result;
 }
@@ -74,9 +88,14 @@ const formatDate = (date) => {
 
 // レンダリングメイン処理
 export default () => {
+  // local style
+  const classes = useStyles();
+
   // DatePicker
   const [beforeDate, setBeforeDate] = React.useState(Date.now());
   const [afterDate, setAfterDate] = React.useState(Date.now());
+  // Select
+  const [selectUser, setSelectUser] = React.useState('');
 
   // DatePickerから制御する為のハンドラ情報
   function getResource() {
@@ -90,44 +109,74 @@ export default () => {
   var data2key = formatDate(afterDate);
 
   // ★グラフ別投入データ
-  const gA = new GraphData('表タイトルA', chartdata, data1key+'週（右）', 'BR', data1key+'週（左）', 'BL',data2key+'週（右）', 'AR', data2key+'週（左）', 'AL', );
-  const gB = new GraphData('表タイトルB', chartdata, data1key+'週（右）', 'BR', data1key+'週（左）', 'BL',data2key+'週（右）', 'AR', data2key+'週（左）', 'AL', );
-  const gC = new GraphData('表タイトルC', chartdata, data1key+'週（右）', 'BR', data1key+'週（左）', 'BL',data2key+'週（右）', 'AR', data2key+'週（左）', 'AL', );
-  const gD = new GraphData('表タイトルD', chartdata, data1key+'週（右）', 'BR', data1key+'週（左）', 'BL',data2key+'週（右）', 'AR', data2key+'週（左）', 'AL', );
-  const gE = new GraphData('表タイトルD', chartdata, data1key+'週（右）', 'BR', data1key+'週（左）', 'BL',data2key+'週（右）', 'AR', data2key+'週（左）', 'AL', );
-  const gF = new GraphData('表タイトルD', chartdata, data1key+'週（右）', 'BR', data1key+'週（左）', 'BL',data2key+'週（右）', 'AR', data2key+'週（左）', 'AL', );
-  const gG = new GraphData('表タイトルD', chartdata, data1key+'週（右）', 'BR', data1key+'週（左）', 'BL',data2key+'週（右）', 'AR', data2key+'週（左）', 'AL', );
+  const gA = new GraphData('表タイトルA', chartdata, data1key + '週（右）', 'BR', data1key + '週（左）', 'BL', data2key + '週（右）', 'AR', data2key + '週（左）', 'AL',);
+  const gB = new GraphData('表タイトルB', chartdata, data1key + '週（右）', 'BR', data1key + '週（左）', 'BL', data2key + '週（右）', 'AR', data2key + '週（左）', 'AL',);
+  const gC = new GraphData('表タイトルC', chartdata, data1key + '週（右）', 'BR', data1key + '週（左）', 'BL', data2key + '週（右）', 'AR', data2key + '週（左）', 'AL',);
+  const gD = new GraphData('表タイトルD', chartdata, data1key + '週（右）', 'BR', data1key + '週（左）', 'BL', data2key + '週（右）', 'AR', data2key + '週（左）', 'AL',);
+  const gE = new GraphData('表タイトルD', chartdata, data1key + '週（右）', 'BR', data1key + '週（左）', 'BL', data2key + '週（右）', 'AR', data2key + '週（左）', 'AL',);
+  const gF = new GraphData('表タイトルD', chartdata, data1key + '週（右）', 'BR', data1key + '週（左）', 'BL', data2key + '週（右）', 'AR', data2key + '週（左）', 'AL',);
+  const gG = new GraphData('表タイトルD', chartdata, data1key + '週（右）', 'BR', data1key + '週（左）', 'BL', data2key + '週（右）', 'AR', data2key + '週（左）', 'AL',);
+
+  // ユーザ選択ボックス表示内容
+  const selectData = [
+    'userA',
+    'userB',
+    'userC',
+  ];
 
   return (
     <>
-      <div className='topItem'>
-        <DatePickerContext.Provider value={resource}>
-          <WorkDatePicker />
-        </DatePickerContext.Provider>
-      </div>
-      <div className='bottomItem'>
-        <ChartDataContext.Provider value={gA}>
-          <GraphA />
-        </ChartDataContext.Provider>
-        <ChartDataContext.Provider value={gB}>
-          <GraphA />
-        </ChartDataContext.Provider>
-        <ChartDataContext.Provider value={gC}>
-          <GraphA />
-        </ChartDataContext.Provider>
-        <ChartDataContext.Provider value={gD}>
-          <GraphA />
-        </ChartDataContext.Provider>
-        <ChartDataContext.Provider value={gE}>
-          <GraphA />
-        </ChartDataContext.Provider>
-        <ChartDataContext.Provider value={gF}>
-          <GraphA />
-        </ChartDataContext.Provider>
-        <ChartDataContext.Provider value={gG}>
-          <GraphA />
-        </ChartDataContext.Provider>
-      </div>
+      <Grid container spacing={2}>
+        <Grid item xs={12} >
+          <Divider />
+        </Grid>
+        <Grid item xs={12} >
+          <Grid container justify="center" spacing={2}>
+            <Grid item >
+              <FormControl variant="outlined" className={classes.formControl}>
+                <Select
+                  labelId="selectuser-label"
+                  id="selectuser"
+                  value={selectUser}
+                  onChange={(e) => { setSelectUser(e.target.value) }}
+                >
+                  {selectData.map((item, keyIndex) =>
+                    <MenuItem key={keyIndex} value={item} >{item}</MenuItem>
+                  )}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item >
+              <DatePickerContext.Provider value={resource}>
+                <WorkDatePicker />
+              </DatePickerContext.Provider>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} >
+          <ChartDataContext.Provider value={gA}>
+            <GraphA />
+          </ChartDataContext.Provider>
+          <ChartDataContext.Provider value={gB}>
+            <GraphA />
+          </ChartDataContext.Provider>
+          <ChartDataContext.Provider value={gC}>
+            <GraphA />
+          </ChartDataContext.Provider>
+          <ChartDataContext.Provider value={gD}>
+            <GraphA />
+          </ChartDataContext.Provider>
+          <ChartDataContext.Provider value={gE}>
+            <GraphA />
+          </ChartDataContext.Provider>
+          <ChartDataContext.Provider value={gF}>
+            <GraphA />
+          </ChartDataContext.Provider>
+          <ChartDataContext.Provider value={gG}>
+            <GraphA />
+          </ChartDataContext.Provider>
+        </Grid>
+      </Grid>
     </>
   );
 }
