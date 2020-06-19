@@ -1,5 +1,4 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
@@ -25,27 +24,25 @@ export default () => {
   function disableWeekends(date) {
     return date.getDay() === 0 || date.getDay() === 6;
   }
-  
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container justify="space-around">
-        <DatePicker 
-          id="date-picker"
-          label="Before"
-          value={datepicker.before}
-          onChange={handleBeforeDateChange}
-          shouldDisableDate={disableWeekends}
-          format="yyyy/MM/dd"
-        />
-        <DatePicker 
-          id="date-picker"
-          label="After"
-          value={datepicker.after}
-          onChange={handleAfterDateChange}
-          shouldDisableDate={disableWeekends}
-          format="yyyy/MM/dd"
-        />
-      </Grid>
+      <DatePicker
+        id="date-pickerbefore"
+        label="Before"
+        value={datepicker.before}
+        onChange={handleBeforeDateChange}
+        shouldDisableDate={disableWeekends}
+        format="yyyy/MM/dd"
+      />
+      <DatePicker
+        id="date-pickerafter"
+        label="After"
+        value={datepicker.after}
+        onChange={handleAfterDateChange}
+        shouldDisableDate={disableWeekends}
+        format="yyyy/MM/dd"
+      />
     </MuiPickersUtilsProvider>
   );
 }

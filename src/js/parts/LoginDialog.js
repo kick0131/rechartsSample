@@ -22,6 +22,9 @@ export default () => {
 
     // ダイアログ表示状態
     const [dialogView, setDialogView] = useState(false);
+    // ダイアログ入力情報
+    const [dialogid, setDialogid] = useState('');
+    const [dialogpass, setDialogpass] = useState('');
 
     // ボタンメッセージ
     const [btnText, setBtnText] = useState(LOGIN_BTN_MSG);
@@ -62,6 +65,7 @@ export default () => {
         var loginResult = true;
 
         // ★ToDo:Cognito連携など
+        console.log('ID:' + dialogid + ' PASS:' + dialogpass);
 
         // ログイン成功
         if (loginResult) {
@@ -95,15 +99,15 @@ export default () => {
                         label={idLabelName}
                         type="text"
                         fullWidth
-                        onChange={(e) => { setTitle(e.target.value) }}
+                        onChange={(e) => { setDialogid(e.target.value) }}
                     />
                     <TextField
                         margin="dense"
                         id="description"
                         label={passWordLabelName}
-                        type="text"
+                        type="password"
                         fullWidth
-                        onChange={(e) => { setDescription(e.target.value) }}
+                        onChange={(e) => { setDialogpass(e.target.value) }}
                     />
                 </DialogContent>
                 <DialogActions>

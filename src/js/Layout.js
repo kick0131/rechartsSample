@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { createContext } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import RadarChartDemo from './charts/RadarChartDemo';
 import LineChartDemo from './charts/LineChartDemo';
@@ -14,7 +14,6 @@ import Typography from '@material-ui/core/Typography'
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { blue, green, purple, pink } from '@material-ui/core/colors';
-import Button from '@material-ui/core/Button';
 
 // テーマ配色
 const theme = createMuiTheme({
@@ -24,6 +23,9 @@ const theme = createMuiTheme({
   typography: {
     h6: {
       color: '#333',
+    },
+    button: {
+      textTransform: "none"
     },
   },
   props: {
@@ -36,7 +38,10 @@ const theme = createMuiTheme({
     MuiSwitch: {
       color: "primary"
     },
-  }
+    MuiTextField: {
+      variant: "outlined"
+    },
+  },
 });
 
 // ログイン情報
@@ -56,22 +61,20 @@ export default () => {
   // ログイン情報をコンテキストとして子コンポーネントに渡す
   var loginInfo = new LoginInfo();
   function getResource() {
-    return { 
+    return {
       data: loginInfo
-      }
+    }
   };
   const resource = getResource();
 
   return (
     <ThemeProvider theme={theme}>
-      <Button color="primary">Primary</Button>
-      <Button color="secondary">Secondary</Button>
       <div className='my-grid'>
         <LoginInfoContext.Provider value={resource}>
           <Header />
           <Router>
             <SideBar className='my-grid-item' />
-            <MainContents className='my-grid-item'>
+            <MainContents>
               <Route extract path="/" component={WorkGraph02}></Route>
               <Route path="/radar" component={RadarChartDemo}></Route>
               <Route path="/line" component={LineChartDemo}></Route>

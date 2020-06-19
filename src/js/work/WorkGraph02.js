@@ -1,6 +1,12 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import WorkDatePickerB from './WorkDatePickerForB';
 import GraphB from './GraphB';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
 
 // 表示させたいデータ群(DynamoDBを想定)
 import * as json from '../../data/work.json';
@@ -9,8 +15,14 @@ const chartData = json.dorsiflexion_mean;
 export const DatePickerContext = React.createContext('');
 export const ChartDataContext = React.createContext('');
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    minWidth: 120,
+  },
+}));
+
 // DynamoDBのデータを加工
-function datasplit () {
+function datasplit() {
   // ※加工ロジックは省略し、グラフ表示可能なデータを記載
   var result = [];
   return result;
@@ -40,9 +52,14 @@ const formatDate = (date) => {
 
 // レンダリングメイン処理
 export default () => {
+  // local style
+  const classes = useStyles();
+
   // DatePicker
   const [beforeDate, setBeforeDate] = React.useState(Date.now());
   const [afterDate, setAfterDate] = React.useState(Date.now());
+  // Select
+  const [selectUser, setSelectUser] = React.useState('');
 
   // DatePickerから制御する為のハンドラ情報
   function getResource() {
@@ -51,26 +68,63 @@ export default () => {
   const resource = getResource();
 
   // 整形してグラフデータに投入
-//  chartdata = datasplit();
+  //  chartdata = datasplit();
   var beforeKey = formatDate(beforeDate);
   var afterKey = formatDate(afterDate);
-  
+
   // 投入データ
   // 現時点の想定では、日付をデータキーをするのでそのまま凡例名として使用する
-  const gA = new GraphData('高精度データA',chartData, beforeKey, beforeKey, afterKey, afterKey );
+  const gA = new GraphData('高精度データA', chartData, beforeKey, beforeKey, afterKey, afterKey);
+
+  // ユーザ選択ボックス表示内容
+  const selectData = [
+    'userA',
+    'userB',
+    'userC',
+  ];
 
   return (
     <>
-      <div className='topItem'>
-        <DatePickerContext.Provider value={resource}>
-          <WorkDatePickerB />
-        </DatePickerContext.Provider>
-      </div>
-      <div className='bottomItem'>
-        <ChartDataContext.Provider value={gA}>
-          <GraphB />
-        </ChartDataContext.Provider>
-      </div>
+      <Grid container spacing={2}>
+        <Grid item xs={12} >
+          <Divider />
+        </Grid>
+        <Grid item xs={12} >
+          <Grid container justify="center" spacing={2}>
+            <Grid item >
+              <FormControl variant="outlined" color="secondaly" className={classes.formControl}>
+                <Select
+                  labelId="selectuser-label"
+                  id="selectuser"
+                  value={selectUser}
+                  onChange={(e) => { setSelectUser(e.target.value) }}
+                  color="secondaly"
+                >
+                  {selectData.map((item, keyIndex) =>
+                    <MenuItem key={keyIndex} value={item} >{item}</MenuItem>
+                  )}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item >
+              <DatePickerContext.Provider value={resource}>
+                <WorkDatePickerB />
+              </DatePickerContext.Provider>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} >
+          <ChartDataContext.Provider value={gA}>
+            <GraphB />
+            <GraphB />
+            <GraphB />
+            <GraphB />
+            <GraphB />
+            <GraphB />
+            <GraphB />
+          </ChartDataContext.Provider>
+        </Grid>
+      </Grid>
     </>
   );
 }
