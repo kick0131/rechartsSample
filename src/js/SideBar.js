@@ -1,5 +1,4 @@
 import React, { useContext, } from 'react';
-import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
 import { LoginInfoContext } from './Layout'
 import List from '@material-ui/core/List';
@@ -7,22 +6,29 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded';
+import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
+import ApartmentIcon from '@material-ui/icons/Apartment';
 
 export default () => {
 
     // 親コンポーネントから更新用のハンドラと更新元情報を取得
     const loginInfo = useContext(LoginInfoContext);
 
+    // サイドバー表示内容
+    // [0]:アイコン
+    // [1]:リンク先
+    // [2]:テキスト
+    const defaultIcon = <AccountBoxRoundedIcon />
     const linkData = [
         ["", "Top"],
-        // ["radar", "レーダーチャート　　　"],
-        // ["line", "ラインチャート　"],
-        // ["pie", "パイチャート　　"],
-        // ["bar", "バーチャート　　"],
-        // ["datepicker", "カレンダー　　　"],
-        ["insole1", "サンプル１"],
-        ["insole2", "サンプル２"],
-        ["insole3", "サンプル３"],
+        // [defaultIcon, "radar", "レーダーチャート　　　"],
+        // [defaultIcon, "line", "ラインチャート　"],
+        // [defaultIcon, "pie", "パイチャート　　"],
+        // [defaultIcon, "bar", "バーチャート　　"],
+        // [defaultIcon, "datepicker", "カレンダー　　　"],
+        [defaultIcon, "insole1", "サンプル１"],
+        [<AirportShuttleIcon />,"insole2", "サンプル２"],
+        [<ApartmentIcon />,"insole3", "サンプル３"],
     ];
 
     // Linkコンポーネントのto相当の動作
@@ -46,11 +52,9 @@ export default () => {
                     <aside>
                         <List component="nav">
                             {linkData.map((item, keyIndex) =>
-                                <ListItem button onClick={() => handleLink(item[0])}>
-                                    <ListItemIcon>
-                                        <AccountBoxRoundedIcon />
-                                    </ListItemIcon>
-                                    <ListItemText primary={item[1]} />
+                                <ListItem button onClick={() => handleLink(item[1])}>
+                                    <ListItemIcon>{item[0]}</ListItemIcon>
+                                    <ListItemText primary={item[2]} />
                                 </ListItem>
                             )}
                         </List>
