@@ -4,7 +4,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
-import Divider from '@material-ui/core/Divider';
+// ユーザコンポーネント
 import WorkDatePickerFor02 from './WorkDatePickerFor02';
 import Graph02 from './Graph02';
 
@@ -86,9 +86,6 @@ export default () => {
   return (
     <>
       <Grid container spacing={2}>
-        <Grid item xs={12} >
-          <Divider />
-        </Grid>
         <Grid item xs={12} >
           <Grid container justify="center" spacing={2}>
             <Grid item >
