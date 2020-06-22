@@ -1,4 +1,4 @@
-import React, { useState, } from 'react';
+import React, { useState, Component, } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -10,15 +10,9 @@ import LoginDialog from './parts/LoginDialog';
 import Drawer from '@material-ui/core/Drawer';
 // ユーザコンポーネント
 import SideBar from './SideBar'
+import { drawerWidth } from './Layout'
 
-const drawerWidth = 200;
 const useStyles = makeStyles((theme) => ({
-    // root: {
-    //     flexGrow: 1,
-    // },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
     title: {
         flexGrow: 1,
     },
@@ -35,13 +29,26 @@ const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.enteringScreen,
         }),
     },
-    // サイドバー
+    // サイドバーの幅
     drawer: {
         width: drawerWidth,
         flexShrink: 0,
     },
-    drawerPaper: {
-        width: drawerWidth,
+    drawerOpen: {
+        transition: theme.transitions.create('width', {
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
+    drawerClose: {
+        width: 0,
+        transition: theme.transitions.create('width', {
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        overflowX: 'hidden',
+        // width: theme.spacing(7) + 1,
+        // [theme.breakpoints.up('sm')]: {
+        //     width: theme.spacing(9) + 1,
+        // },
     },
 }));
 
@@ -49,10 +56,11 @@ export default () => {
     const classes = useStyles();
 
     // DrawerのOnOff状態
-    const [drawerState, setDrawerState] = useState(true);
+    const [drawerState, setDrawerState] = useState(false);
 
     // DrawerOnOff切り替え
     const drawerStateToggle = () => {
+        console.log('=== drawerStateToggle Called (now):' + drawerState)
         setDrawerState(!drawerState);
     }
 
@@ -84,17 +92,29 @@ export default () => {
                 </Toolbar>
             </AppBar>
             <Drawer
-                className={classes.drawer}
+                className={
+                    clsx(classes.drawer, {
+                        [classes.drawerOpen]: drawerState,
+                        [classes.drawerClose]: !drawerState
+                    })
+                }
                 variant="persistent"
                 anchor='left'
                 open={drawerState}
-                onClose={drawerStateToggle}
                 classes={{
-                    paper: classes.drawerPaper,
+                    paper: clsx(classes.drawer, {
+                        [classes.drawerOpen]: drawerState,
+                        [classes.drawerClose]: !drawerState
+                    }),
                 }}
             >
                 <SideBar />
             </Drawer>
+            <div id="marginContainer" className={
+                clsx(classes.drawerClose, {
+                    [classes.drawerOpen]: drawerState
+                })
+            }></div>
         </>
     );
 };

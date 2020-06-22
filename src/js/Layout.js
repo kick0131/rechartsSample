@@ -1,9 +1,9 @@
-import React, { createContext } from 'react';
+import React, { useState, createContext } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography'
-import { createMuiTheme,makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { blue, green, purple, pink } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 // ユーザコンポーネント
@@ -17,7 +17,7 @@ import WorkGraph02 from './work/WorkGraph02';
 import WorkGraph03 from './work/WorkGraph03';
 import Header from './Header';
 import MainContents from './MainContents';
-
+import Top from './Top';
 // テーマ配色
 const theme = createMuiTheme({
   palette: {
@@ -48,8 +48,12 @@ const theme = createMuiTheme({
 
 });
 
+// サイドバーの幅
+export const drawerWidth = 200;
+
+// このページ内に適用するスタイルシート
 const useStyles = makeStyles((theme) => ({
-  paper: {
+  fotterpaper: {
     padding: theme.spacing(2),
     textAlign: 'center',
   },
@@ -62,6 +66,8 @@ class LoginInfo {
     this.loginUser = "";
     // ログイン状態
     this.isLogin = false;
+    // メニューのOpen状態
+    this.isMenuOpen = false;
   }
 }
 export const LoginInfoContext = createContext('');
@@ -82,38 +88,31 @@ export default () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Grid container>
-        <LoginInfoContext.Provider value={resource}>
-          <Router>
-            <Grid item xs={12}>
-              <Header />
-            </Grid>
-            <Grid item xs={2}>
-              <div></div>
-            </Grid>
-            <Grid item xs={10}>
-              <MainContents>
-                <Route extract path="/" ></Route>
-                <Route path="/radar" component={RadarChartDemo}></Route>
-                <Route path="/line" component={LineChartDemo}></Route>
-                <Route path="/pie" component={PieChartDemo}></Route>
-                <Route path="/bar" component={BarChartDemo}></Route>
-                <Route path="/datepicker" component={DatePickerDemo}></Route>
-                <Route path="/insole1" component={WorkGraph01}></Route>
-                <Route path="/insole2" component={WorkGraph02}></Route>
-                <Route path="/insole3" component={WorkGraph03}></Route>
-                <Route path="/insole4" component={WorkGraph01}></Route>
-              </MainContents>
-            </Grid>
-          </Router>
-        </LoginInfoContext.Provider>
-        <Grid container justify="center">
-          <Grid item xs={12}>
-            <footer className={classes.paper}><Typography>コピーライト</Typography></footer>
+      <LoginInfoContext.Provider value={resource}>
+        <Router>
+          <Grid container>
+            <Header />
+            <MainContents>
+              <Route exact path="/" component={Top}></Route>
+              <Route exact path="/radar" component={RadarChartDemo}></Route>
+              <Route exact path="/line" component={LineChartDemo}></Route>
+              <Route exact path="/pie" component={PieChartDemo}></Route>
+              <Route exact path="/bar" component={BarChartDemo}></Route>
+              <Route exact path="/datepicker" component={DatePickerDemo}></Route>
+              <Route exact path="/insole1" component={WorkGraph01}></Route>
+              <Route exact path="/insole2" component={WorkGraph02}></Route>
+              <Route exact path="/insole3" component={WorkGraph03}></Route>
+              <Route exact path="/insole4" component={WorkGraph01}></Route>
+            </MainContents>
           </Grid>
+        </Router>
+      </LoginInfoContext.Provider >
+      <Grid container justify="center">
+        <Grid item xs={12}>
+          <footer className={classes.fotterpaper}><Typography variant="h6">コピーライト</Typography></footer>
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 };
 
