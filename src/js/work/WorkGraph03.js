@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, createContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -12,8 +12,8 @@ import Graph03 from './Graph03';
 import * as json from '../../data/work.json';
 const chartData = json.dorsiflexion_mean;
 
-export const DatePickerContext = React.createContext('');
-export const ChartDataContext = React.createContext('');
+export const DatePickerContext = createContext('');
+export const ChartDataContext = createContext('');
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -56,10 +56,10 @@ export default () => {
   const classes = useStyles();
 
   // DatePicker
-  const [beforeDate, setBeforeDate] = React.useState(Date.now());
-  const [afterDate, setAfterDate] = React.useState(Date.now());
+  const [beforeDate, setBeforeDate] = useState(Date.now());
+  const [afterDate, setAfterDate] = useState(Date.now());
   // Select
-  const [selectUser, setSelectUser] = React.useState('');
+  const [selectUser, setSelectUser] = useState('');
 
   // DatePickerから制御する為のハンドラ情報
   function getResource() {
@@ -74,7 +74,7 @@ export default () => {
 
   // 投入データ
   // 現時点の想定では、日付をデータキーをするのでそのまま凡例名として使用する
-  const gA = new GraphData('高精度データA', chartData, beforeKey + '(介入前)', beforeKey, afterKey + '(介入後)', afterKey);
+  const gA = new GraphData('高頻度計測データA', chartData, beforeKey + '(介入前)', beforeKey, afterKey + '(介入後)', afterKey);
 
   // ユーザ選択ボックス表示内容
   const selectData = [

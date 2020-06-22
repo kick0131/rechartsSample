@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, createContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -13,8 +13,8 @@ import GraphA from './GraphA';
 import * as json from '../../data/work.json';
 var chartdata = json.speed_mean;
 
-export const DatePickerContext = React.createContext('');
-export const ChartDataContext = React.createContext('');
+export const DatePickerContext = createContext('');
+export const ChartDataContext = createContext('');
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -92,10 +92,10 @@ export default () => {
   const classes = useStyles();
 
   // DatePicker
-  const [beforeDate, setBeforeDate] = React.useState(Date.now());
-  const [afterDate, setAfterDate] = React.useState(Date.now());
+  const [beforeDate, setBeforeDate] = useState(Date.now());
+  const [afterDate, setAfterDate] = useState(Date.now());
   // Select
-  const [selectUser, setSelectUser] = React.useState('');
+  const [selectUser, setSelectUser] = useState('');
 
   // DatePickerから制御する為のハンドラ情報
   function getResource() {
