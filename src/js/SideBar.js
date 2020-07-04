@@ -1,6 +1,5 @@
 import React, { useState, useContext, } from 'react';
 import { useHistory } from "react-router-dom";
-import { LoginInfoContext } from './Layout'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -12,9 +11,6 @@ import ApartmentIcon from '@material-ui/icons/Apartment';
 
 export default () => {
 
-    // 親コンポーネントから更新用のハンドラと更新元情報を取得
-    const loginInfo = useContext(LoginInfoContext);
-
     // サイドバー表示内容
     // [0]:アイコン
     // [1]:リンク先
@@ -22,14 +18,14 @@ export default () => {
     const defaultIcon = <LaptopIcon />
     const linkData = [
         [defaultIcon, "", "Top"],
-        // [defaultIcon, "radar", "レーダーチャート　　　"],
-        // [defaultIcon, "line", "ラインチャート　"],
-        // [defaultIcon, "pie", "パイチャート　　"],
-        // [defaultIcon, "bar", "バーチャート　　"],
-        // [defaultIcon, "datepicker", "カレンダー　　　"],
-        [<AccountBoxRoundedIcon />, "insole1", "サンプル１"],
-        [<AirportShuttleIcon />, "insole2", "サンプル２"],
-        [<ApartmentIcon />, "insole3", "サンプル３"],
+        [defaultIcon, "/radar", "レーダーチャート　　　"],
+        [defaultIcon, "/line", "ラインチャート　"],
+        [defaultIcon, "/pie", "パイチャート　　"],
+        [defaultIcon, "/bar", "バーチャート　　"],
+        [defaultIcon, "/datepicker", "カレンダー　　　"],
+        [<AccountBoxRoundedIcon />, "/graph/1", "固定X軸"],
+        [<AirportShuttleIcon />, "/graph/2", "可変X軸"],
+        // [<ApartmentIcon />, "graph/3", "サンプル３"],
     ];
 
     // Linkコンポーネントのto相当の動作
@@ -50,24 +46,5 @@ export default () => {
         );
     }
 
-    // 描画ロジック
-    const SideBarRander = () => {
-        console.log('=== SideBarRander');
-        console.log(loginInfo.data.isLogin);
-
-        // ★ToDo:ログイン状態に応じて機能の有効無効を制御したい
-        // ★うまく動いていない(常にfalse)
-        if (loginInfo.data.isLogin) {
-            return (
-                <nav></nav>
-            );
-
-        } else {
-            return (
-                <SideBarContents />
-            );
-        }
-    }
-
-    return (<SideBarRander />);
+    return (<SideBarContents />);
 }

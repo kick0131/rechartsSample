@@ -10,7 +10,7 @@ import LoginDialog from './parts/LoginDialog';
 import Drawer from '@material-ui/core/Drawer';
 // ユーザコンポーネント
 import SideBar from './SideBar'
-import { drawerWidth } from './Layout'
+import { drawerWidth } from './App'
 
 const useStyles = makeStyles((theme) => ({
     title: {

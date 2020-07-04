@@ -12,9 +12,7 @@ import LineChartDemo from './charts/LineChartDemo';
 import PieChartDemo from './charts/PieChartDemo';
 import BarChartDemo from './charts/BarChartDemo';
 import DatePickerDemo from './material/DatePickerDemo';
-import WorkGraph01 from './work/WorkGraph01';
-import WorkGraph02 from './work/WorkGraph02';
-import WorkGraph03 from './work/WorkGraph03';
+import GraphMain from './work/GraphMain';
 import Header from './Header';
 import MainContents from './MainContents';
 import Top from './Top';
@@ -49,7 +47,7 @@ const theme = createMuiTheme({
 });
 
 // サイドバーの幅
-export const drawerWidth = 200;
+export const drawerWidth = 250;
 
 // このページ内に適用するスタイルシート
 const useStyles = makeStyles((theme) => ({
@@ -99,10 +97,7 @@ export default () => {
               <Route exact path="/pie" component={PieChartDemo}></Route>
               <Route exact path="/bar" component={BarChartDemo}></Route>
               <Route exact path="/datepicker" component={DatePickerDemo}></Route>
-              <Route exact path="/insole1" component={WorkGraph01}></Route>
-              <Route exact path="/insole2" component={WorkGraph02}></Route>
-              <Route exact path="/insole3" component={WorkGraph03}></Route>
-              <Route exact path="/insole4" component={WorkGraph01}></Route>
+              <Route path="/graph/:mode" component={GraphMain} />
             </MainContents>
           </Grid>
         </Router>
